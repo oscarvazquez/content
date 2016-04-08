@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  oauth_token: MyString
+  oauth_expires_at: 2016-02-13 15:36:53
+  confirmation: false
+  confirmation: 
+  city: MyString
+  state: MyString
+  country: MyString
+  summary: MyText
+  exerpt: MyText
+  resume: MyString
+  profile_pic: MyString
+  linked_in: MyString
+  facebook: MyString
+  twitter: MyString
+  lat: 1.5
+  lng: 1.5
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  oauth_token: MyString
+  oauth_expires_at: 2016-02-13 15:36:53
+  confirmation: false
+  confirmation: 
+  city: MyString
+  state: MyString
+  country: MyString
+  summary: MyText
+  exerpt: MyText
+  resume: MyString
+  profile_pic: MyString
+  linked_in: MyString
+  facebook: MyString
+  twitter: MyString
+  lat: 1.5
+  lng: 1.5

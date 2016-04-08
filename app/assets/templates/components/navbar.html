@@ -1,0 +1,125 @@
+<nav id = 'navster' class = 'nav navbar-default navbar-fixed-top'>
+	<div class = 'container'>
+		<div class = 'navbar-header'>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<h1>NavBar</h1>
+		</div>
+		<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+			<ul class = 'nav navbar-nav navbar-right'>
+				<li id = 'messages_icon' class = 'dropdown-menu'>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+						<span class = "glyphicon glyphicon-user" aria-hidden='true'></span>
+						<div id = 'message_notification'>{{myUser.follower_request_unread}}</div>
+						<span class="caret"></span>
+					</a>
+					<ul class = 'dropdown-menu messages_dropdown'>
+						<div class = 'row message_options'>
+							<div class = 'col-md-5 col-md-offset-1'>
+								<a ng-click = "showRequests()">Requests</a> <span class = 'glyphicon glyphicon-play'></span>
+							</div>
+						</div>
+						<div id = 'message_display'>
+							<div class = 'actual_message' ng-repeat = "request in myUser.follow_requests" ng-class = "{read : request.status == true}">
+								<div class = 'thirty'>
+									<a ng-click="showFollower(request.follower_id)" class = "thumbnail">
+	         							<img src = "http://linkhay2.vcmedia.vn/l/templates/images/no_thumb_120.png" alt = "Generic placeholder thumbnail">
+	      							</a>
+	      						</div>
+	      						<div class = 'seventy'>
+									<li ng-click="showRequest(request.id)" class = 'messages'>
+										<p>{{request.follower}} wishes to follow you</p>
+										<p class = 'message'>{{request.request}}</p>
+										<p class = 'message'>{{request.created_at}}</p>
+									</li>
+									<hr>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</li>
+				<li id = 'messages_icon' class = 'dropdown-menu'>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+						<span class = "glyphicon glyphicon-comment" aria-hidden='true'></span>
+						<div id = 'message_notification'>{{myUser.messages_unread}}</div>
+						<span class="caret"></span>
+					</a>
+					<ul class = 'dropdown-menu messages_dropdown'>
+						<div class = 'row message_options'>
+							<div class = 'col-md-5 col-md-offset-1'>
+								<a ng-click = "showMessages()">Messages</a> <span class = 'glyphicon glyphicon-play'></span>
+							</div>
+							<div class = 'col-md-5 col-md-offset-1'>
+								<a ng-click = 'newMessage()'>New Message</a> <span class = 'glyphicon glyphicon-pencil'></span>
+							</div>
+						</div>
+						<div id = 'message_display'>
+							<div class = 'actual_message' ng-repeat = "message in myUser.messages" ng-class = "{read : message.status == true}">
+								<div class = 'thirty'>
+									<a ng-click="showUser(message.sender_id)" class = "thumbnail">
+	         							<img src = "http://linkhay2.vcmedia.vn/l/templates/images/no_thumb_120.png" alt = "Generic placeholder thumbnail">
+	      							</a>
+	      						</div>
+	      						<div class = 'seventy'>
+									<li ng-click="showMessage(message.id)" class = 'messages'>
+										<p>{{message.sender}}</p>
+										<p class = 'message'>{{message.message}}</p>
+										<p class = 'message'>{{message.created_at}}</p>
+									</li>
+									<hr>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</li>
+				<li id = 'messages_icon' class = 'dropdown-menu'>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+						<span class = "glyphicon glyphicon-globe" aria-hidden='true'></span>
+						<div id = 'message_notification'>{{myUser.notifications_unread}}</div>
+						<span class="caret"></span>
+					</a>
+					<ul class = 'dropdown-menu messages_dropdown'>
+						<div class = 'row message_options'>
+							<div class = 'col-md-5 col-md-offset-1'>
+								<a ng-click = "markNotiAsRead()">Mark all as Read</a> <span class = 'glyphicon glyphicon-play'></span>
+							</div>
+						</div>
+						<div id = 'message_display'>
+							<div class = 'actual_message' ng-repeat = "notification in myUser.notifications" ng-class = "{read : notification.status == true}">
+								<div class = 'thirty'>
+									<a ng-click="showBusiness(notification.initiator_id)" class = "thumbnail">
+	         							<img src = "http://linkhay2.vcmedia.vn/l/templates/images/no_thumb_120.png" alt = "Generic placeholder thumbnail">
+	      							</a>
+	      						</div>
+	      						<div class = 'seventy'>
+									<li ng-click="showEvent(notification.event.id)" class = 'messages'>
+										<p class = 'message'>{{notification.initiator}} {{notification.notification}}</p>
+										<p class = 'message'>{{notification.created_at}}</p>
+									</li>
+									<hr>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</li>
+				<li class = 'dropdown-menu papa-dropdown'>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<span class = "glyphicon glyphicon-user" aria-hidden='true'></span> {{myUser.name}}
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class = 'profile_links'>
+							<a href = '#'>Preferences</a>
+						</li>
+						<li class = 'profile_links'>
+							<log-out></log-out>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,5 @@
+class UserSubcategory < ActiveRecord::Base
+	belongs_to :user
+	belongs_to :subcategory
+
+end

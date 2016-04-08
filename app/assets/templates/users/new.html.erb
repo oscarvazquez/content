@@ -1,0 +1,131 @@
+<style>
+	body{
+		background-image: url(<%= asset_path 'background.jpg' %>);
+		background-size: 100vw 100vh;
+		background-repeat: no-repeat;
+		overflow: hidden; 
+   	 	height: 100%;
+	}
+	.halfawesome{
+		width: 40%;
+    	margin: 0 auto;
+    	display: inline-block;	
+	}
+	.awesome{
+		width: 80%;
+    	margin: 0 auto; 
+	}
+	.awesome2{
+		width: 30%;
+		margin: 0 auto;
+		min-width: 345px !important;
+	}
+	.awesome3{
+		z-index: -1;
+		margin-top: 20%;
+		vertical-align: middle;
+		padding: 20px;
+		background-color: rgba(222, 221, 220, 0.9);
+		height: 475px;
+		border-radius: 5px;
+			-webkit-box-shadow: -2px 3px 8px 7px rgba(0,0,0,0.19);
+			-moz-box-shadow: -2px 3px 8px 7px rgba(0,0,0,0.19);
+			box-shadow: -2px 3px 8px 7px rgba(0,0,0,0.19);
+	}
+	.space{
+		margin-top: 20px;
+	}
+	.space2{
+		margin-top: 30px;
+	}
+	.form-control{
+		background: white !important;
+		opacity: 1;
+		border-radius: 5px !important;
+		height: 40px !important;
+	}
+	.btn{
+		width: 80% !important;
+		height: 40px !important;
+	}
+	.message{
+		height: 51px;
+	}
+	.title_form{
+		color: black;
+		font-size: 30px;
+	}
+	.alert-error{
+		background-color: #c65353;
+		color: white;
+		border: none;
+	}
+	.alert-success{
+		background-color: #236197;
+		color: white;
+		border: none;
+	}
+	.terms{
+		color: #66666d;
+		font-size: 10px;
+		width: 80%;
+	}
+	.sign_in{
+		color: #66666d;
+		font-size: 14px;
+		width: 80%;
+	}
+	.error{
+		display: inline-block;
+	}
+</style>
+<div class = 'container'>
+	<div class = 'row message text-center'>
+		<div ng-show="message" class = "alert alert-{{alertStyle}}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<p ng-repeat = "error in message" class = 'error'>&nbsp;{{error}}&nbsp;</p>
+			<p ng-show="email">{{email}}</p>
+		</div>
+	</div>
+	<div class="row text-center awesome2">
+		<div class = 'awesome3'>
+			<form class="col-md-12">
+				<h3 class = 'title_form'>Register Today</h3>
+				<div class="row space">
+					<div class="halfawesome input-group col-sm-12">
+						<input id="first_name" type="text" class = "form-control" ng-model="newUser.first_name" placeholder = 'First Name'>
+					</div>
+					<div class="halfawesome input-group col-sm-12">
+						<input id="last_name" type="text" class = "form-control" ng-model="newUser.last_name" placeholder = 'Last Name'>
+					</div>
+				</div>
+				<div class="row space">
+					<div class="input-group awesome">
+						<input id="email" type="email" class = "form-control" ng-model="newUser.email" placeholder = 'Email Address'>
+					</div>
+				</div>
+				<div class="row space">
+					<div class="input-group awesome">
+						<input id="password" type="password" class = "form-control" ng-model="newUser.password" placeholder = 'Password'>
+					</div>
+				</div>
+				<div class="row space">
+					<div class="input-group awesome">
+						<input id="password_confirmation" type="password" class = "form-control" ng-model="newUser.password_confirmation" placeholder = 'Password Confirmation'>
+					</div>
+				</div>
+				<div class = 'row space'>
+					<p class = 'terms awesome'>By signing up, I agree to do everything <a href='http://www.oscar.tech'>oscar</a> tells me to do <a href='http://www.dictionary.com/browse/forever?s=t'>forever</a>. Are you sure that this is what you want?</p>
+				</div>
+				<div class = "row space">
+					<div class="input-group awesome">
+						<button class="btn btn-primary" name="action" ng-click = "addUser()">Register</button>
+					</div>
+				</div>
+				<div class = 'row space'>
+					<p class = 'sign_in awesome'>Already a member? <a href = '/login'>Sign in</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

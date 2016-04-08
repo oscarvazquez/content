@@ -1,0 +1,11 @@
+<div class = 'panel panel-default'>
+	<div class = "panel-heading">
+		<h5 class = 'panel-heading'>{{user.rating}} of 5 stars - {{user.review_count}} reviews</h5>
+	</div>
+	<div class = "panel-body well">
+		<div class = 'review' ng-repeat = "review in user.reviews">
+			<p><div class="numberCircle">{{review.rating}}</div> {{review.writer}}: {{review.review}}<p>
+		</div>
+		<a ng-click = "showReviews()">All Reviews</a>
+	</div>
+</div>

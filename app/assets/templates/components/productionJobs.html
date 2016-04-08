@@ -1,0 +1,16 @@
+<div class = 'panel panel-default'>
+	<div class = "panel-heading">
+		<h4 class = 'panel-heading'>Jobs in Production <div class = 'jobsCircle'>{{user.jobs_production_count}}</div></h4>
+	</div>
+	<div class = "panel-body well">
+		<div class = 'production'>
+			Search Jobs: <input ng-model = 'progressJobs'></input>
+		</div>
+	</div>
+	<ul class = "list-group">
+		<li class = 'list-group-item jobShow' ng-repeat = "jobs in user.jobs_in_production | filter:progressJobs">
+			<p ng-click = "showJob(jobs.id)">{{jobs.title}} - Time left: {{jobs.time_left}}</p>
+			<button class = 'submitJob btn btn-primary' ng-click = "submitJob(jobs.id)">Submit</button>
+		</li>
+	</ul>
+</div>
