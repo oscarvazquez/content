@@ -2,9 +2,9 @@ require 'open-uri'
 class User < ActiveRecord::Base
 	has_secure_password
 
-	has_many :user_categories
+	has_many :user_categories, as: :holder
 	has_many :categories, through: :user_categories
-	has_many :user_subcategories
+	has_many :user_subcategories, as: :holder
 	has_many :subcategories, through: :user_subcategories
 	
 	has_many :reviews, as: :receiver
@@ -23,8 +23,13 @@ class User < ActiveRecord::Base
 	has_many :jobs
 	has_many :messages_out, as: :sender, class_name: "Message"
 	has_many :messages_in, as: :receiver, class_name: "Message"	
+
+
+	has_many :comments, as: :commenter
 	
 	has_many :notifications_in, as: :receiver, class_name: "Notification"
+
+	has_many :likes, as: :liker
 
 	validates :first_name, :last_name, presence: :true, on: :create
 	validates :first_name, length: {minimum: 2, too_short: "The minimum length for Last Name is 2"}
@@ -32,6 +37,9 @@ class User < ActiveRecord::Base
 	validates :password, :password_confirmation, presence: true, length: {minimum: 6, too_short: "The minimum length for Password is 6"}
 	validates :email, presence: true, uniqueness: true, email: true
 	
+	has_many :images, as: :imageable
+
+	has_many :posts, as: :writer
 	# probably wont need this ill leave it here for now just in case
 	# validates :exerpt, length: {maximum: 240, too_long: "The maximum length of exerpt is 240 characters"}
 	# validates :summary, length: {minimum: 240, too_short: "The minimum length of summary is 240 characters"}
@@ -107,20 +115,18 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def set_profile_pic!(profile_pic)
-		obj = S3_BUCKET.object("#{id}/profile_picture")
-		if obj.upload_file(profile_pic.path)
+	def set_profile_pic! file
+		obj = S3_BUCKET.object("profile_pictures/#{id}/#{file.original_filename}")
+		if obj.upload_file(file.path, acl: 'public-read')
 			update_attribute(:profile_pic, obj.public_url)
+			self.images.create(file_path: "profile_pictures/#{id}/#{file.original_filename}", url: "#{obj.public_url}")
 		end
 	end
 
 	def unset_profile_pic!
-		obj = S3_BUCKET.object("#{id}/profile_picture")
-		if obj.delete
-			update_attribute(:profile_pic, nil)
-		end
+		update_attribute(:profile_pic, nil)
 	end
-
+ 
 	def set_local!(location)
 		local = "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{location['lat']},#{location['lng']}&key=#{ENV['GOOGLE_GEOCODE_API']}"		
 		response = open(local).read
@@ -161,9 +167,9 @@ class User < ActiveRecord::Base
   	end
 	
 	def verify_email
-		SCHEDULER.in '5s' do
-			UserMailer.verify_email(self).deliver
-		end
+		# SCHEDULER.in '5s' do
+		# 	UserMailer.verify_email(self).deliver
+		# end
 	end
 
 	def set_login
@@ -178,7 +184,7 @@ class User < ActiveRecord::Base
 
 	def set_location(location)
 		local = "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{location['lat']},#{location['lng']}&key=#{ENV['GOOGLE_GEOCODE_API']}"		
-		response = open(men).read
+		response = open(local).read
 		data = JSON.parse(response)
 		if data['status'] != "OVER_QUERY_LIMIT" or data['status'] != "ZERO_RESULTS"
 			self.set_location = true

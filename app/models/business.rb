@@ -2,8 +2,8 @@ require 'open-uri'
 class Business < ActiveRecord::Base
   	has_secure_password
 
-	has_many :business_categories
-	has_many :business_subcategories
+	has_many :user_categories, as: :holder
+	has_many :user_subcategories, as: :holder
 	has_many :categories, through: :business_categories
 	has_many :subcategories, through: :business_subcategories
 	has_many :reviews, as: :receiver
@@ -16,6 +16,10 @@ class Business < ActiveRecord::Base
 	has_many :requests
 	has_many :notifications_in, as: :receiver, class_name: "Notification"
 
+
+	has_many :comments, as: :commenter
+
+
 	# this association is not working figure out how to make two associations to the same class
 	has_many :reviews_out, as: :writer, class_name: "Review"
 
@@ -25,6 +29,10 @@ class Business < ActiveRecord::Base
 	before_create :set_login, :set_email_token
 	after_create :verify_email, :set_admin
 	before_save :downcase_fields
+
+	def profile_pic
+
+	end
 
 	def downcase_fields
 		email.downcase!
@@ -39,11 +47,15 @@ class Business < ActiveRecord::Base
 	end
 
 	def set_category!(category)
-		business_categories.create(category: category)
+		user_categories.create(category: category)
 	end
 
 	def set_subcategory!(subcategory)
-		business_subcategories.create(subcategory: subcategory)
+		user_subcategories.create(subcategory: subcategory)
+	end
+
+	def get_notified event, initiator, message
+		notifications_in.create(event: event, initiator: initiator, notification: message)
 	end
   	
 	private 
@@ -61,7 +73,7 @@ class Business < ActiveRecord::Base
   	end
 	
 	def verify_email
-		UserMailer.verify_email(self).deliver
+		# UserMailer.verify_email(self).deliver
 	end
 
 	def set_login

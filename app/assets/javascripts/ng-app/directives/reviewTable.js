@@ -1,8 +1,9 @@
 angular.module('oscar')
 	.directive('reviewTable', ['$window', '$http', function($window, $http){
 			controller = ['$scope', '$location', function($scope, $location){
-					$scope.showReviews = function(){
-						console.log('this is going to show all reviews ');
+					$scope.showReviews = function(userId){
+						console.log(userId);
+						$location.path('/users/review/'+ userId);
 					}
 				}]
 			return {

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-	default from: "jo@zwaig.com"
+	default from: "bo@zwaig.com"
 
 	def verify_email(user)
 		@user = user

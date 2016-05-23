@@ -1,7 +1,8 @@
 angular.module('oscar')
 	.controller('usersDashboardController', 
-		function($scope, $location, $routeParams, userFactory){
+		function($scope, $location, $routeParams, $timeout, userFactory){
 			var userId = $routeParams.userId
+			$scope.doneLoading = false
 			userFactory.getUser(userId, function(data){
 				if(data.loggedIn === 'false'){
 					$location.path('/login')
@@ -9,8 +10,17 @@ angular.module('oscar')
 				if(data.loggedIn === true){
 					$scope.user = data;
 					$scope.loggedIn = true;
+					$scope.doneLoading = true
+
+					// $timeout(function(){
+					// 	$scope.doneLoading = true
+					// }, 3000)
 				}
 			})
+			userFactory.getUserProfile(userId, function(data){
+				$scope.userProfile = data.data;
+				$scope.doneLoadingProfile = true
+			})			
 			$scope.getUser = function(){
 				userFactory.getUser(userId, function(data){
 					if(!data.loggedIn){
@@ -21,5 +31,5 @@ angular.module('oscar')
 						$scope.user = data;
 					}
 				})
-			}
+			}			
 })

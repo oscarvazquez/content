@@ -23,8 +23,8 @@ Rails.application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "blairlaes",
-    password: "Rnadmsdlfndjwlsek"
+    user_name: "",
+    password: ""
   }
 
   # Print deprecation notices to the Rails logger.

@@ -1,7 +1,6 @@
 angular.module('oscar')
 	.directive('navBar', ['$window', '$http', function($window, $http){
 			controller = ['$scope', '$location', function($scope, $location){
-					console.log($scope.myUser);
 					$scope.showMessage = function(messageId){
 						console.log('showing message id ' + messageId);
 					}

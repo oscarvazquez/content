@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404015232) do
+ActiveRecord::Schema.define(version: 20160417004541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,26 +28,6 @@ ActiveRecord::Schema.define(version: 20160404015232) do
   end
 
   add_index "admins", ["business_id"], name: "index_admins_on_business_id", using: :btree
-
-  create_table "business_categories", force: true do |t|
-    t.integer  "category_id"
-    t.integer  "business_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "business_categories", ["business_id"], name: "index_business_categories_on_business_id", using: :btree
-  add_index "business_categories", ["category_id"], name: "index_business_categories_on_category_id", using: :btree
-
-  create_table "business_subcategories", force: true do |t|
-    t.integer  "subcategory_id"
-    t.integer  "business_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "business_subcategories", ["business_id"], name: "index_business_subcategories_on_business_id", using: :btree
-  add_index "business_subcategories", ["subcategory_id"], name: "index_business_subcategories_on_subcategory_id", using: :btree
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -95,6 +75,9 @@ ActiveRecord::Schema.define(version: 20160404015232) do
     t.integer  "commenter_id"
     t.string   "commenter_type"
     t.text     "comment"
+    t.string   "url"
+    t.string   "file_path"
+    t.string   "file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,6 +112,18 @@ ActiveRecord::Schema.define(version: 20160404015232) do
 
   add_index "followers", ["followed_id", "followed_type"], name: "index_followers_on_followed_id_and_followed_type", using: :btree
   add_index "followers", ["follower_id", "follower_type"], name: "index_followers_on_follower_id_and_follower_type", using: :btree
+
+  create_table "images", force: true do |t|
+    t.string   "url"
+    t.string   "file_path"
+    t.string   "file_type"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type", using: :btree
 
   create_table "jobs", force: true do |t|
     t.integer  "user_id"
@@ -170,6 +165,7 @@ ActiveRecord::Schema.define(version: 20160404015232) do
     t.integer  "receiver_id"
     t.string   "receiver_type"
     t.text     "message"
+    t.string   "subject"
     t.boolean  "status",        default: false
     t.integer  "sender_id"
     t.string   "sender_type"
@@ -187,7 +183,7 @@ ActiveRecord::Schema.define(version: 20160404015232) do
     t.string   "event_type"
     t.integer  "initiator_id"
     t.string   "initiator_type"
-    t.string   "notification"
+    t.text     "notification"
     t.boolean  "status",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -212,6 +208,19 @@ ActiveRecord::Schema.define(version: 20160404015232) do
 
   add_index "pitches", ["business_id"], name: "index_pitches_on_business_id", using: :btree
   add_index "pitches", ["user_id"], name: "index_pitches_on_user_id", using: :btree
+
+  create_table "posts", force: true do |t|
+    t.text     "post"
+    t.integer  "subcategory_id"
+    t.datetime "published"
+    t.integer  "writer_id"
+    t.string   "writer_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["subcategory_id"], name: "index_posts_on_subcategory_id", using: :btree
+  add_index "posts", ["writer_id", "writer_type"], name: "index_posts_on_writer_id_and_writer_type", using: :btree
 
   create_table "requests", force: true do |t|
     t.integer  "business_id"
@@ -253,24 +262,26 @@ ActiveRecord::Schema.define(version: 20160404015232) do
   add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
 
   create_table "user_categories", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "holder_id"
+    t.string   "holder_type"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "user_categories", ["category_id"], name: "index_user_categories_on_category_id", using: :btree
-  add_index "user_categories", ["user_id"], name: "index_user_categories_on_user_id", using: :btree
+  add_index "user_categories", ["holder_id", "holder_type"], name: "index_user_categories_on_holder_id_and_holder_type", using: :btree
 
   create_table "user_subcategories", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "holder_id"
+    t.string   "holder_type"
     t.integer  "subcategory_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "user_subcategories", ["holder_id", "holder_type"], name: "index_user_subcategories_on_holder_id_and_holder_type", using: :btree
   add_index "user_subcategories", ["subcategory_id"], name: "index_user_subcategories_on_subcategory_id", using: :btree
-  add_index "user_subcategories", ["user_id"], name: "index_user_subcategories_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

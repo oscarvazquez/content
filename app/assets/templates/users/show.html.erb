@@ -1,36 +1,58 @@
 <style>
 body { padding-top: 100px; }
 </style>
-<nav-bar my-user = "user"></nav-bar>
-<div class = "container">
-	<div class = "row">
-		<div class = 'col-md-3'>
-			<div class = 'row'>
-				<div class = 'col-md-12'>
-					<review-table user="user"></review-table>
+<div ng-if="doneLoading === false" class = 'loader'>
+	<div></div>
+</div>
+<div ng-if = "doneLoading === true">
+	<nav-bar my-user = "user"></nav-bar>
+	<div class = "container">
+		<div class = "row">
+			<div class = 'col-md-3'>
+				<div class = 'row'>
+					<div class = 'col-md-12'>
+						<div class = "panel-body well center_this">
+							<profile-pic my-user="user"></profile-pic>
+						</div>
+					</div>					
+					<div class = 'col-md-12'>
+						<review-table user="user"></review-table>
+					</div>
+					<div class = 'col-md-12'>
+						<div class = 'panel panel-default'>
+							<div class = "panel-heading">
+								<h4 class = 'panel-heading'>Set your Location</h4>
+							</div>
+							<div class = "panel-body well">
+								<map-geo-location height='150' width='100%' my-user = 'user'></map-geo-location>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class = 'col-md-9'>
+				<div class = 'row'>
+					<div class = 'col-md-6'>
+						<production-jobs user = "user"></production-jobs>
+					</div>
+					<div class = 'col-md-6'>
+						<completed-jobs user = "user"></completed-jobs>
+					</div>
 				</div>
-				<div class = 'col-md-12'>
-					<div class = 'panel panel-default'>
-						<div class = "panel-heading">
-							<h4 class = 'panel-heading'>Set your Location</h4>
-						</div>
-						<div class = "panel-body well">
-							<map-geo-location height='150' width='100%' my-user = 'user'></map-geo-location>
-						</div>
+				<div class = 'row'>
+					<div class = 'col-md-12'>
+						<categories user-profile="userProfile" cat-delete = "true"></categories>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class = 'col-md-4'>
-			<production-jobs user = "user"></production-jobs>
-		</div>
-		<div class = 'col-md-4'>
-			<completed-jobs user = "user"></completed-jobs>
-		</div>
-	</div>
-	<div class = 'row'>
-		<div class = 'col-md-12 user_info'>
-			{{user}}
+		<div class = 'row'>
+			<div class = 'col-md-12 user_info'>
+				{{user}}
+			</div>
+			<div class = 'col-md-12 user_info'>
+				{{userProfile}}
+			</div>
 		</div>
 	</div>
 </div>

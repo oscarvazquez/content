@@ -3,7 +3,10 @@ var oscar = angular.module('oscar', [
 	'templates', 
 	'ngFileUpload',
   'ui.bootstrap',
-  'ngAnimate'
+  'ngAnimate',
+  'ngAria',
+  'ngMaterial',
+  'ng-sweet-alert'
 ]);
 
 (function(){
@@ -28,9 +31,17 @@ var oscar = angular.module('oscar', [
               controller: 'usersDashboardController',
               templateUrl: 'users/show.html'
             })
+            .when('/users/:userId/profile', {
+              controller: 'usersProfileController',
+              templateUrl: 'users/profile.html'
+            })
             .when('/users/review/:userId', {
               controller: 'reviewsController',
-              templateUrl: 'users/show.html'
+              templateUrl: 'reviews/show.html'
+            })
+            .when('/businesses', {
+              controller: 'businessesController',
+              templateUrl: 'businesses/index.html'
             });
 
         $locationProvider.html5Mode(true);

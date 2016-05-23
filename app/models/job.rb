@@ -40,26 +40,26 @@ class Job < ActiveRecord::Base
 	private
 
 	def job_accepted
-		JobMailer.job_accepted(self)
+		# JobMailer.job_accepted(self)
 	end
 
 	def set_reminder
-		one_day = (self.timeline - 1).to_s + 'd'
-		two_days_past_due = (self.timeline + 2).to_s + 'd'
-		SCHEDULER.in(one_day) do 
-			JobMailer.job_one_day_out(self)
-		end
-		SCHEDULER.in(self.timeline.to_s + 'd') do 
-			JobMailer.job_due(self)
-		end
-		SCHEDULER.in(two_days_past_due) do 
-			JobMailer.job_past_due(self)
-		end
+		# one_day = (self.timeline - 1).to_s + 'd'
+		# two_days_past_due = (self.timeline + 2).to_s + 'd'
+		# SCHEDULER.in(one_day) do 
+		# 	JobMailer.job_one_day_out(self)
+		# end
+		# SCHEDULER.in(self.timeline.to_s + 'd') do 
+		# 	JobMailer.job_due(self)
+		# end
+		# SCHEDULER.in(two_days_past_due) do 
+		# 	JobMailer.job_past_due(self)
+		# end
 	end
 
 	def job_completed
 		if self.completed
-			JobMailer.job_completed(self)
+			# JobMailer.job_completed(self)
 		end
 	end
 

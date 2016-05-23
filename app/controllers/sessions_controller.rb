@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 	def create
-		if not user_login
+		unless user_login
 			business_login
 		end
 	end

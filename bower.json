@@ -11,7 +11,10 @@
       "ng-file-upload": "",
       "moment": "2.0.0",
       "angular-bootstrap": "",
-      "angular-animate": "latest"
+      "angular-animate": "latest",
+      "angular-material": "latest",
+      "angular-aria": "latest",
+      "ng-sweet-alert": "latest"
     }
   }
 }

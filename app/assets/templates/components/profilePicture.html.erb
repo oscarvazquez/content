@@ -1,0 +1,12 @@
+<div class = 'row'>
+	<div class = 'col-lg-12'>
+		<img ngf-src = "file" ngf-background="file" id = "profilePic"></img>
+	</div>
+	<div ng-if = "setProperty != 'false'">
+		<button class="btn" ngf-select ng-model="$parent.file" name="file" ngf-pattern="'image/*'"
+			    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+			    ngf-resize="{width: 150, height: 300}">Upload</button>
+		<button class = 'btn' id = 'submitPic' ng-click = "addPicture()">Save</button>
+	</div>	
+</div>
+

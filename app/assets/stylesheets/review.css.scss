@@ -1,0 +1,132 @@
+.ratingsCircle{
+    border-radius: 25%;
+    /*behavior: url(PIE.htc);  remove if you don't care about IE8 */
+    width: 100px;
+    height: 50px;
+    padding: 8px;
+    background: #0077b5;
+    border: 2px solid black;
+    color: white;
+    text-align: center;
+    font: 22px Arial, sans-serif;
+    display: inline-block;
+}
+.reviewsCircle{
+    border-radius: 25%;
+    /*behavior: url(PIE.htc);  remove if you don't care about IE8 */
+    width: 40px;
+    height: 25;
+    padding: 2px;
+    background: #0077b5;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    font: 12px Arial, sans-serif;
+    display: inline-block;
+}
+.filter_list{
+    padding-left: 0px;
+    height: 100%;
+    margin-bottom: 0px;
+    box-shadow: 2px 3px 3px #888888;
+}
+.filter_list li {
+    display: inline-block;
+    /*border-right: 1px solid #9197a3;*/
+    height: 45px;
+    padding: 5px;
+    margin-left: 0px;
+
+}
+.filter_list li button {
+    border-radius: 0px;
+    background-color: white;
+    color: #9197a3;
+}
+.filter_list li button:focus{
+    outline: none;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+   outline: none;
+   outline: 0;
+}
+
+
+.active_filter {
+    border-bottom: 7px solid #0077b5;
+}
+.active_filter button {
+    color: #0077b5 !important;
+}
+
+.review_info{
+    margin-bottom: 0px;
+    font-size: 14px;
+    color: #4e5665;
+}
+.rating_info{
+    margin-bottom: 0px;
+    font-size: 12px;
+    color: #4e5665;
+}
+
+.review {
+    border: 1px solid #9197a3;
+    box-shadow: 2px 3px 3px #888888;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.filters_reviews{
+    margin-bottom: 10px;
+    padding: auto;
+    border: 1px solid #9197a3;
+}
+.thumbnail_review{
+    height: 50px;
+    width: 50px;
+}
+.thumbnail_comment{
+    height: 40px;
+    width: 40px;
+}
+.review_time{
+    font-size: 12px;
+    color: #4e5665;    
+}
+.review_hr{
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+}
+.comment_review{
+    padding: 5px;
+}
+.commenter{
+    font-weight: bold;
+}
+.commenter:hover{
+    cursor: pointer !important; 
+    cursor: hand !important;
+}
+.comment_text{
+    display: block;
+}
+.add_comment_row{
+    height: 50px;
+}
+.comment_box{
+    padding-top: 5px;
+}
+.create_comment{
+    display: inline-block;
+        width: 12%;
+
+}
+.comment_input{
+    width: 70%;
+    display: inline-block;
+}

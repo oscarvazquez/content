@@ -4,7 +4,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.references :receiver, polymorphic: true, index: true
       t.references :event, polymorphic: true, index: true
       t.references :initiator, polymorphic: true, index: true
-      t.string :notification
+      t.text :notification
       t.boolean :status, default: false
 
       t.timestamps

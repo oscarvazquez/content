@@ -1,0 +1,31 @@
+<div class = 'row comment_review' ng-repeat = "comment in commentable.comments">
+	<div class = 'col-lg-1 review_header'>
+		<a ng-click="showUser(comment.commenter_id, comment.commenter_type)" class = "thumbnail thumbnail_comment">
+			<img src = "{{comment.commenter_pic}}" alt = "Generic placeholder thumbnail">
+		</a>
+	</div>
+	<div class = 'col-lg-11'>
+		<a ng-click = "deleteComment(comment)" ng-if = "comment.can_delete == true" id = "close" class = "clickable"></a>
+		<span class = 'comment_text'><a class = 'commenter' ng-click = "showUser(comment.commenter_id, comment.commenter_type)">{{comment.commenter}}</a> {{comment.comment}}</span>
+		<div class = 'row'>
+			<div class = 'col-lg-4' ng-repeat = "image in comment.images">
+				<span><img src = "{{image.image_url}}"></img></span>
+			</div>
+		</div>
+		<likes likeable = "comment" likeabletype = "Comment" likeableid = "{{comment.id}}"></likes>
+	</div>
+</div>
+<div class = "row add_comment_row">
+	<div class = "col-lg-1">
+		<a ng-click="showUser(comment.commenter_id)" class = "thumbnail thumbnail_comment">
+			<img src = "{{comment.commenter_pic}}">
+		</a>
+	</div>
+	<div class = 'col-lg-11 comment_box'>
+		<input class = "form-control comment_input" placeholder = "Write a comment..." ng-model = "newComment.comment" />
+		<button class="btn create_comment" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+	    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+	    ngf-resize="{width: 100, height: 100}">Upload</button>
+		<button ng-click = "addComment()" class = 'btn create_comment'>Submit</button>
+	</div>
+</div>

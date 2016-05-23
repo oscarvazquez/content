@@ -1,0 +1,3 @@
+<a ng-if = "likeable.liked == false" class = "clickable {{buttonstyle}}" ng-click = "likeLikeable(likeable)">Like&nbsp;</a>
+<a ng-if = "likeable.liked == true" class = "clickable {{buttonstyle}}" ng-click = "unlikeLikeable(likeable)">Unlike&nbsp;</a>
+&nbsp;<a ng-if = "likeable.like_count > 0" ng-click = "showLikes(likeable.id)"><span class = 'glyphicon glyphicon-thumbs-up' aria-hidden = 'true'></span>&nbsp;{{likeable.like_count}}  Likes</a> - <span class = 'review_time'>{{likeable.created_atn}} ago</span>

@@ -2,8 +2,11 @@ class Review < ActiveRecord::Base
 	belongs_to :receiver, polymorphic: true
 	belongs_to :writer, polymorphic: true
 	belongs_to :job
-	validates :job_id, presence: true
+	
+	has_many :comments, as: :commentable
+	has_many :likes, as: :likeable
 
+	validates :job_id, presence: true
 	validates :receiver, :writer, :rating, presence: true
 	
 	# This one is kind of working except for when I test it with rspec.
@@ -12,7 +15,7 @@ class Review < ActiveRecord::Base
 	# validates :writer, writer: :true
 
 	
-	after_create :update_receiver!
+	after_create :update_receiver!, :notify_user
 
 	private
 
@@ -29,6 +32,11 @@ class Review < ActiveRecord::Base
 		receiver.update_attribute(:rating_count, new_count)
 		receiver.update_attribute(:rating, new_total)
 		destroy
+	end
+
+	def notify_user
+		message = "wrote you a new review: " + review
+	  	receiver.get_notified self, writer, message
 	end
 
 end

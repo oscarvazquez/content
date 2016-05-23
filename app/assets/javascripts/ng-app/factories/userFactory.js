@@ -16,5 +16,10 @@ angular.module('oscar')
 			callback(data);
 		})
 	}
+	factory.getUserProfile = function(userId, callback){
+		$http.get('/users/profile/' + userId + '.json').then(function(data){
+			callback(data);
+		})
+	}
 	return factory;
 })

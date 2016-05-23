@@ -1,0 +1,13 @@
+<div class = "panel-body well">
+	<div id = 'new_post'>
+		<textarea ng-model = "newPost.post" class = 'form-control' placeholder = "Tell the world what you're thinking..."></textarea>
+		<img ngf-src = "file" ngf-resize = "{width: 500, height: 400}"></img>
+	</div>
+	<button class="btn create_comment" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+ngf-resize="{width: 500, height: 400}">
+		<span class = "glyphicon glyphicon-camera" aria-hidden = 'true'></span>
+		Image
+	</button>	
+	<button class = 'btn btn-primary' ng-click = "addPost()">Submit</button>
+</div>

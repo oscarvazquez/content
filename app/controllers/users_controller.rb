@@ -9,7 +9,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
+  end
+
+  def profile
     @user = User.find(params[:id])
+    @categories = Category.all
   end
 
   def create
@@ -33,13 +38,17 @@ class UsersController < ApplicationController
 
   def add_location
     @user = User.find(params[:location][:userID])
-    puts 'this should be working'
-    puts params[:location]
     if @user.set_local! params[:location]
       render :json => {message: 'Location updated', user: @user}, status: :created
     else 
       render :json => {error: "An error occured while trying to updaet location"}, status: :bad_request
     end
+  end
+
+  def add_profile_picture
+    @user = current_user
+    @user.set_profile_pic! params[:file]
+    render :json => {message: "profile picture added"}
   end
 
   private 

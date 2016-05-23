@@ -1,8 +1,7 @@
 class Category < ActiveRecord::Base
 	has_many :user_categories, dependent: :destroy
-	has_many :users, through: :user_categories
-	has_many :business_categories, dependent: :destroy
-	has_many :businesses, through: :business_categories
+	has_many :users, through: :user_categories, source: :holder, :source_type => "User"
+	has_many :businesses, through: :user_categories, source: :holder, :source_type => "Business"
 	has_many :subcategories, dependent: :destroy
 	has_many :requests
 	

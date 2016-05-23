@@ -1,0 +1,71 @@
+<style>
+body { padding-top: 100px; }
+</style>
+<nav-bar my-user = "user"></nav-bar>
+<div class = 'container'>
+	<div class = 'row'>
+		<div class = 'col-lg-3 panel panel-default'>
+			<div class = 'panel-heading row'>
+				<div class = 'col-lg-6'>
+					<div class = 'ratingsCircle'>
+						{{rating}}
+						<span class = 'glyphicon glyphicon-star' aria-hidden = 'true'></span>
+					</div>
+				</div>
+				<div class = 'col-lg-6'>
+					<p class = 'review_info'>{{rating}} of 5 stars</p>
+					<p class = 'review_info'>{{reviewCount}} reviews</p>
+				</div>
+			</div>
+			<div class = "panel-body">
+				<p class = 'rating_info'>5 stars {{count_5}}</p>
+				<p class = 'rating_info'>4 stars {{count_4}}</p>
+				<p class = 'rating_info'>3 stars {{count_3}}</p>
+				<p class = 'rating_info'>2 stars {{count_2}}</p>
+				<p class = 'rating_info'>1 stars {{count_1}}</p>
+			</div>
+		</div>
+		<div class = 'col-lg-7'>
+			<div class = 'filters_reviews'>
+				<ul class = 'filter_list' >
+					<li ng-class = "{active_filter: predicate==='like_count'}" ng-click = "order('like_count')">
+						<button class = 'btn filter_review'>Most Helpful</button>
+					</li>
+					<li ng-class = "{active_filter: predicate==='created_at'}">
+						<button class = 'btn filter_review' ng-click = "order('created_at')">Most Recent</button>
+					</li>
+					<li ng-class = "{active_filter: predicate==='rating'}">
+						<button class = 'btn filter_review' ng-click = "order('rating')">By Rating</button>
+					</li>
+				</ul>
+			</div>
+			<div ng-repeat = "review in reviews | orderBy:predicate:reverse" class = 'review'>
+				<div class = 'row'>
+					<div class = 'col-lg-1 review_header'>
+						<a ng-click="showUser(review.writer_id)" class = "thumbnail thumbnail_review">
+							<img src = "http://linkhay2.vcmedia.vn/l/templates/images/no_thumb_120.png" alt = "Generic placeholder thumbnail">
+						</a>
+					</div>
+					<div class = 'col-lg-10'>
+						<a ng-click="showUser(review.writer_id)">{{review.writer}}</a> reviewed <a ng-click = "showUser(review.receiver_id)">{{review.receiver}}</a> -- 
+						<div class = 'reviewsCircle'>
+							{{review.rating}}
+							<span class = 'glyphicon glyphicon-star' aria-hidden = 'true'></span>
+						</div>
+						<p class = 'review_time'>{{review.created_atn}} ago</p>
+					</div>
+				</div>
+				<p>{{review.review}}</p>
+				<hr class = 'review_hr'>
+				<div class = 'row'>
+					<div class = 'col-lg-8'>
+						<likes likeable = "review" likeabletype = "Review" likeableid = "{{review.id}}"></likes>
+					</div>
+				</div>
+				<hr class = 'review_hr'>
+				<hr>
+				<comments commentable="review" commentableid = "{{review.id}}" commentabletype = "Review"></comments>
+			</div>
+		</div>
+	</div>
+</div>

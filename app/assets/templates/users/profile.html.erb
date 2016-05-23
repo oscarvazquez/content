@@ -1,0 +1,63 @@
+<style>
+body { padding-top: 100px; }
+</style>
+<div ng-if="doneLoading === false" class = 'loader'>
+	<div></div>
+</div>
+<div ng-if = "doneLoading === true">
+	<nav-bar my-user = "user"></nav-bar>
+	<div class = "container">
+			<div class = "row">
+				<div class = 'col-md-4'>
+					<div class = 'row'>
+						<div class = 'col-md-12'>
+							<div class = "panel-body well center_this">
+								<profile-pic my-user="userProfile" set-property = "{{userProfile.has_access}}"></profile-pic>
+								<message receiver-id = "{{userProfile.id}}" receiver-type = "User" receiver-name = "{{userProfile.name}}"></message>
+							</div>
+						</div>						
+						<div class = 'col-md-12'>
+							<categories user-profile="userProfile" cat-delete = "false"></categories>
+						</div>						
+						<div class = 'col-md-12'>
+							<review-table user="userProfile"></review-table>
+						</div>
+					</div>
+				</div>
+				<div class = 'col-md-8'>
+					<div class = 'row'>
+						<div class = 'col-lg-12'>
+							<div ng-if = "userProfile.has_access == true">
+								<create-post posts = "userProfile.posts"></create-post>
+							</div>
+							<div ng-repeat = "post in userProfile.posts | orderBy:predicate:reverse" class = 'review'>
+								<div class = 'row'>
+									<div class = 'col-lg-1 review_header'>
+										<a ng-click="showUser(post.writer_id)" class = "thumbnail thumbnail_review">
+											<img src = "http://linkhay2.vcmedia.vn/l/templates/images/no_thumb_120.png" alt = "Generic placeholder thumbnail">
+										</a>
+									</div>
+									<div class = 'col-lg-10'>
+										<a ng-click="showUser(post.writer_id)">{{post.writer}}</a>
+										<p class = 'review_time'>{{post.created_atn}} ago</p>
+									</div>
+								</div>
+								<p>{{post.post}}</p>
+								<img class = 'center_this' ng-repeat = "image in post.images" src = '{{image.image_url}}'></img>
+								<hr class = 'review_hr'>
+								<div class = 'row'>
+									<div class = 'col-lg-8'>
+										<likes likeable = "post" likeabletype = "Post" likeableid = "{{post.id}}"></likes>
+									</div>
+								</div>
+								<hr class = 'review_hr'>
+								<hr>
+								<comments commentable="post" commentableid = "{{post.id}}" commentabletype = "Post"></comments>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

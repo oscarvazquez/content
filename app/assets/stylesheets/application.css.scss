@@ -1,5 +1,36 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "sweetalert/dev/sweetalert.scss";
 @import "navbar";
 @import "dashboard";
 @import "productionJobs";
+@import "review";
+@import "categories";
+
+.clickable:hover{
+	cursor: pointer !important; 
+	cursor: hand !important;	
+}
+
+.loader{
+	height: 100vh;
+	width: 100vw;
+}
+.loader div{
+	height: 250px;
+	width: 250px;
+	margin: 0 auto;
+	background-image: url('loader.gif');
+	background-repeat: no-repeat;
+
+}
+#close{
+    display:block;
+    float:right;
+    width:30px;
+    height:29px;
+    background:url(http://www.htmlgoodies.com/img/registrationwelcome/close_icon.png) no-repeat center center;
+}
+.center_this{
+	text-align: center;
+}

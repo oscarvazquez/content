@@ -20,6 +20,10 @@
 //= require angular-bootstrap/ui-bootstrap.min.js
 //= require angular-bootstrap/ui-bootstrap-tpls.min.js
 //= require angular-animate
+//= require angular-material
+//= require angular-aria
+//= require sweetalert
+//= require ng-sweet-alert
 //= require ng-app/app
 //= require_tree ./ng-app/factories
 //= require_tree ./ng-app/services

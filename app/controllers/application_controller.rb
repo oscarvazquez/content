@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def has_access
-		if not current_user
+		unless current_user
 			render :json => {status: 'error', loggedIn: 'false', message: 'Session timed out please login'}
 		end
 	end
